@@ -1,0 +1,8 @@
+require('dplyr')
+require('ggplot2')
+require('jsonlite')
+require('knitr')
+require('plyr')
+require('tidyr')
+require('RCurl')
+require('tidyr')
