@@ -5,18 +5,38 @@ date: "Sunday, March 01, 2015"
 output: html_document
 ---
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r}
-summary(cars)
-```
-
-You can also embed plots, for example:
-
 ```{r, echo=FALSE}
-plot(cars)
+source('../00 Doc/.RProfile')
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+###Importing the Dataframe
+
+
+#####First, import the .csv file into SQL. 
+Click the (+) to access the dropdown file system of the connection in which you would like to import the data.Right click the __Tables__ folder and select the __Import Data__ selection.
+![](./csv_to_sql1.png)
+
+Find the .csv file you want to work with and select it for import.
+
+![](./csv_to_sql2.png)
+
+Run through the Data Import Wizard, giving the table a name and identifying the types that each column represent.
+
+
+![](./csv_to_sql3.png)
+
+Once you are finished with this, the data has been stored in the database.
+
+
+In our particular case, the data has been stored on a cloud-based database. An SQL query will be used to extract the dataframe from the database for access during the project. The following query is used:
+
+```
+df <- data.frame(fromJSON(getURL(URLencode('129.152.144.84:5001/rest/native/?query="select * from DATAFRAME"'),httpheader=c(DB='jdbc:oracle:thin:@129.152.144.84:1521:ORCL', USER='C##cs329e_UTEid', PASS='orcl_UTEid', MODE='native_mode', MODEL='model', returnDimensions = 'False', returnFor = 'JSONLITE'), verbose = TRUE)))
+```
+
+
+###Medical Discharge 
+***
+```{r}
+source("../01 Data/Med Discharge dataset.R")
+```
