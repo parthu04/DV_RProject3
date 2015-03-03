@@ -28,15 +28,29 @@ Run through the Data Import Wizard, giving the table a name and identifying the 
 Once you are finished with this, the data has been stored in the database.
 
 
-In our particular case, the data has been stored on a cloud-based database. An SQL query will be used to extract the dataframe from the database for access during the project. The following query is used:
+In our particular case, the data has been stored on a cloud-based database. An SQL query will be used to extract the dataframe from the database for access during the project. The following example query was used:
 
 ```
 df <- data.frame(fromJSON(getURL(URLencode('129.152.144.84:5001/rest/native/?query="select * from DATAFRAME"'),httpheader=c(DB='jdbc:oracle:thin:@129.152.144.84:1521:ORCL', USER='C##cs329e_UTEid', PASS='orcl_UTEid', MODE='native_mode', MODEL='model', returnDimensions = 'False', returnFor = 'JSONLITE'), verbose = TRUE)))
 ```
 
 
-###Medical Discharge 
+##Dataframes
 ***
+###Distribution of Undergraduate Majors
+
+This dataset presents the first major of degree achieved by people that are 25 years and older. Data is distributed according to geographical ID. This ID information is translated in a later table.
+
 ```{r}
-source("../01 Data/Med Discharge dataset.R")
+source("../01 Data/Majors dataset.R")
+tbl_df(mdf)
+```
+
+###Geographical ID with States
+
+This dataset presents the geographical ID and correlates it to the state in which that ID is.
+
+```{r}
+source("../01 Data/States dataset.R")
+tbl_df(sdf)
 ```
