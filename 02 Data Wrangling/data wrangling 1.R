@@ -1,2 +1,12 @@
-data_wrange_vis1 <- mjdf %>% group_by(STATE) %>% summarise(mean_compsci = mean(COMPUTERS.MATH.AND.STATS), n=n()) %>% tbl_df
-head(data_wrange_vis1)
+data_wrangle1 <- mjdf %>% group_by(STATE) %>% summarise(COMPUTERS.MATH.AND.STATS = mean(COMPUTERS.MATH.AND.STATS), BIOLOGY.AND.AGRICULTURE = mean(BIOLOGY.AND.AGRICULTURE), PHYSICS = mean(PHYSICS), PSYCHOLOGY = mean(PSYCHOLOGY), SOCIOLOGY = mean(SOCIOLOGY), ENGINEERING = mean(ENGINEERING), MULTIDISCIPLINARY.STUDIES = mean(MULTIDISCIPLINARY.STUDIES), SCIENCES = mean(SCIENCES), BUSINESS = mean(BUSINESS), EDUCATION = mean(EDUCATION), LITERATURE.AND.LANGUAGES = mean(LITERATURE.AND.LANGUAGES), LIBERAL.ARTS.AND.HISTORY = mean(LIBERAL.ARTS.AND.HISTORY), VISUAL.AND.PERFORMING.ARTS = mean(VISUAL.AND.PERFORMING.ARTS), COMMUNICATION = mean(COMMUNICATION), OTHER = mean(OTHER))
+head(data_wrangle)
+
+
+for (i in data_wrangle1[1])
+  row <- data_wrangle1[i]
+  values <- row[,c(('COMPUTERS.MATH.AND.STATS', 'PHYSICS')]
+  lbls <- c("COMPUTERS.MATH.AND.STATS", "PHYSICS")
+  pie(values, labels = , main="Pie Chart of Degrees")
+
+
+row <- data_wrangle1["AK"]
