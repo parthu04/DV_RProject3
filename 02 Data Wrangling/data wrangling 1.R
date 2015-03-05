@@ -2,11 +2,15 @@ data_wrangle1 <- mjdf %>% group_by(STATE) %>% summarise(COMPUTERS.MATH.AND.STATS
 head(data_wrangle)
 
 
-for (i in data_wrangle1[1])
-  row <- data_wrangle1[i]
-  values <- row[,c(('COMPUTERS.MATH.AND.STATS', 'PHYSICS')]
-  lbls <- c("COMPUTERS.MATH.AND.STATS", "PHYSICS")
-  pie(values, labels = , main="Pie Chart of Degrees")
+l <- list()
+for (i in range(53)) {
+  row  <- data_wrangle1[1 ,c('STATE', 'COMPUTERS.MATH.AND.STATS', 'PHYSICS')]
+  values <- row[,c('COMPUTERS.MATH.AND.STATS', 'PHYSICS')]
+  lbls <- names(values)
+  p <- pie(c(1,2), labels = lbls , main=row[1])
+  print(p)
+  l[[i]] <- p
+}
 
 
-row <- data_wrangle1["AK"]
+
