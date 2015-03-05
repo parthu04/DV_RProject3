@@ -2,15 +2,15 @@ data_wrangle1 <- mjdf %>% group_by(STATE) %>% summarise(COMPUTERS.MATH.AND.STATS
 head(data_wrangle)
 
 
+tidy_wrangle1 <- gather(data_wrangle1, Degree, 'STATE')
+names(tidy_wrangle1) <- c("State", "Degree", "Percentage")
+
+states <- c('AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GE', 'HI', 'ID', 'IL', 'IN', 'KS', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY')
+
 l <- list()
-for (i in range(53)) {
-  row  <- data_wrangle1[1 ,c('STATE', 'COMPUTERS.MATH.AND.STATS', 'PHYSICS')]
-  values <- row[,c('COMPUTERS.MATH.AND.STATS', 'PHYSICS')]
-  lbls <- names(values)
-  p <- pie(c(1,2), labels = lbls , main=row[1])
+for (i in states) {
+  newdata <- subset(tidy_wrangle1, State == i)
+  p <- ggplot(newdata, aes(x=Degree, y=Percentage)) + geom_bar(stat='identity') +ggtitle(i) + coord_flip()
   print(p)
   l[[i]] <- p
 }
-
-
-
