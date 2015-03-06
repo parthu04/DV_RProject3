@@ -62,9 +62,9 @@ This dataset presents the average and median income of each state.
 source("../01 Data/Income dataset.R")
 tbl_df(idf)
 ```
-
-## Dataframes
 ***
+## Dataframes
+
 ###Dataframe 1: Inner Join of the Majors and States 
 
 The two datasets of undergraduate majors and states are joined in SQL by using the geographical ID column. The resulting dataset gives the percentages of each major for every state in the U.S. 
@@ -99,13 +99,18 @@ First, dataframe 1 is piped through a group by statement to sort by state follow
 
 ![](./data_wrangle_vis1.png)
 
+Based on the data, education and business first bachelor degrees are prominent in a majority of the states and that states have a varying distribution of degrees based on its society and employment. In the case of DC, the higher percentage of sociology degrees have a correlation with the greater amount of politicians concentrated in the area. 
+
 ###Average Income vs Total Graduates by State
 Next, dataframe 2 is grouped by state and subsequently summarised to generate the total amount of graduates and average income for each state. The dataframe is then run through ggplot to generate a scatterplot that is color coded by state.
 
 ![](./data_wrangle_vis2.png)
-From this scatterplot, a direct linear relationship between number of graduates and average income. 
+
+From this scatterplot, a direct linear relationship can be seen between number of graduates and average income. As the total number of graduates with bachelor's degrees increases, there is a similar increase in the average income. 
 
 ###Total Graduate Distribution by State of Degrees
-Finally, dataframe 3 is piped through a group by statement to sort by state followed by a summarization to generate a single total value for each degree. The data was then reformatted to fit the "tidy" specifications. To generate a single png for all the states, a for loop was utilized in conjunction with the png function through a list to populate a single png.
+Finally, dataframe 3 is piped through a group by statement to sort by state followed by a summarization to generate a single total value for each degree. The data was then reformatted to fit the "tidy" specifications. To generate a single png for all the degrees, a for loop was utilized in conjunction with the png function through a list to populate a single png.
 
 ![](./data_wrangle_vis3.png)
+
+Similar to the first data wrangle, this visualization shows instead, the total graduates rather than a percentage of each degree in every state. For each degree, we can see the distribution of that degree across all states. 
