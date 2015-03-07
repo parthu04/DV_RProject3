@@ -1,17 +1,20 @@
 data_wrangle1 <- mjdf %>% group_by(STATE) %>% summarise(COMPUTERS.MATH.AND.STATS = mean(COMPUTERS.MATH.AND.STATS), BIOLOGY.AND.AGRICULTURE = mean(BIOLOGY.AND.AGRICULTURE), PHYSICS = mean(PHYSICS), PSYCHOLOGY = mean(PSYCHOLOGY), SOCIOLOGY = mean(SOCIOLOGY), ENGINEERING = mean(ENGINEERING), MULTIDISCIPLINARY.STUDIES = mean(MULTIDISCIPLINARY.STUDIES), SCIENCES = mean(SCIENCES), BUSINESS = mean(BUSINESS), EDUCATION = mean(EDUCATION), LITERATURE.AND.LANGUAGES = mean(LITERATURE.AND.LANGUAGES), LIBERAL.ARTS.AND.HISTORY = mean(LIBERAL.ARTS.AND.HISTORY), VISUAL.AND.PERFORMING.ARTS = mean(VISUAL.AND.PERFORMING.ARTS), COMMUNICATION = mean(COMMUNICATION), OTHER = mean(OTHER))
 
 
+tidy_wrangle1 <- gather(data_wrangle1, Degree, 'STATE')
+names(tidy_wrangle1) <- c("State", "Degree", "Percentage")
+
+states <- c('AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'KS', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY')
+
 l <- list()
-for (i in range(53)) {
-  row  <- data_wrangle1[i ,c('STATE', 'COMPUTERS.MATH.AND.STATS', 'PHYSICS', 'PSYCHOLOGY', 'SOCIOLOGY', 'ENGINEERING', 'MULTIDISCIPLINARY.STUDIES', 'SCIENCES', 'BUSINESS', 'EDUCATION', 'LITERATURE.AND.LANGUAGES', 'LIBERAL.ARTS.AND.HISTORY', 'VISUAL.AND.PERFORMING.ARTS', 'COMMUNICATION', 'OTHER')]
-  values <- row[,c('COMPUTERS.MATH.AND.STATS', 'PHYSICS', 'PSYCHOLOGY', 'SOCIOLOGY', 'ENGINEERING', 'MULTIDISCIPLINARY.STUDIES', 'SCIENCES', 'BUSINESS', 'EDUCATION', 'LITERATURE.AND.LANGUAGES', 'LIBERAL.ARTS.AND.HISTORY', 'VISUAL.AND.PERFORMING.ARTS', 'COMMUNICATION', 'OTHER')]
-  lbls <- names(values)
-  p <- pie(as.numeric(values), labels = lbls , main=row[1])
+for (i in states) {
+  newdata <- subset(tidy_wrangle1, State == i)
+  p <- ggplot(newdata, aes(x=Degree, y=Percentage)) + geom_bar(stat='identity') +ggtitle(i) + coord_flip()
   print(p)
   l[[i]] <- p
 }
 
-png("C:\\workspace\\DataVisualization\\DV_RProject3\\00 Doc\\data_wrangle_vis1.png", width = 25, height = 50, units = "in", res = 150)
+png("C:\workspace\DataVisualization\DV_RProject3\00 Doc\data_wrangle_vis1.png", width = 25, height = 50, units = "in", res = 150)
 grid.newpage()
 pushViewport(viewport(layout = grid.layout(10, 25)))   
 
@@ -64,6 +67,7 @@ print(l[[46]], vp = viewport(layout.pos.row = 10, layout.pos.col = 1:5))
 print(l[[47]], vp = viewport(layout.pos.row = 10, layout.pos.col = 6:10))
 print(l[[48]], vp = viewport(layout.pos.row = 10, layout.pos.col = 11:15))
 print(l[[49]], vp = viewport(layout.pos.row = 10, layout.pos.col = 16:20))
+
 
 
 dev.off()
